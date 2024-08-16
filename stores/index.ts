@@ -1,3 +1,2 @@
-export * from "./posts";
+export * from "./post";
 export * from "./color-theme";
-export * from "./single-post";

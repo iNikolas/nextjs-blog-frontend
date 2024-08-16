@@ -15,6 +15,8 @@ export interface PostContent {
   postImg: string;
 }
 
+export type NewPost = { title: string } & PostMeta & PostContent;
+
 export type FeedPost = PostBase & { meta: PostMeta };
 
 export type IndividualPost = PostBase & { content: PostContent };

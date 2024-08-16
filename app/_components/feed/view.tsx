@@ -5,7 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 
 import { paginationLimit } from "@/config";
-import { postsModel } from "@/stores/posts";
+import { postsModel } from "@/stores";
 import { Card, CardError, CardSkeleton } from "./components";
 
 export function Feed() {
