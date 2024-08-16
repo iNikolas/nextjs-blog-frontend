@@ -19,7 +19,7 @@ export function ThemeToggle({
     <DarkModeSwitch
       {...props}
       className={className}
-      checked={isDarkMode}
+      checked={!!isDarkMode}
       onChange={darkModeSelected}
       size={18}
     />
