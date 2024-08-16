@@ -16,12 +16,18 @@ export function ThemeToggle({
   const darkModeSelected = useUnit(colorThemeModel.darkModeSelected);
 
   return (
-    <DarkModeSwitch
-      {...props}
-      className={className}
-      checked={!!isDarkMode}
-      onChange={darkModeSelected}
-      size={18}
-    />
+    <button
+      onClick={() => darkModeSelected(!isDarkMode)}
+      type="button"
+      className="ml-auto flex btn btn-ghost sm:btn-circle sm:shadow"
+    >
+      <DarkModeSwitch
+        className={className}
+        checked={!!isDarkMode}
+        onChange={() => {}}
+        size={18}
+        {...props}
+      />
+    </button>
   );
 }

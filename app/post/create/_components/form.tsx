@@ -3,14 +3,21 @@
 "use client";
 
 import { useForm } from "effector-forms";
+import { useGate, useUnit } from "effector-react";
 import React from "react";
+import { MdPlaylistAddCheckCircle } from "react-icons/md";
 
 import { Editor } from "@/components/presentational";
 import { createPostModel } from "@/stores";
 import { cn } from "@/utils";
+import { useNewPostRedicrect } from "../_utils";
 
 export function Form() {
-  const loading = false;
+  useGate(createPostModel.Gate);
+
+  const loading = useUnit(createPostModel.$loading);
+  const isRedirecting = useNewPostRedicrect();
+
   const { fields, submit, eachValid } = useForm(createPostModel.form);
 
   return (
@@ -97,9 +104,17 @@ export function Form() {
       <button
         type="submit"
         className={cn("btn btn-primary", loading && "loading")}
-        disabled={loading || !eachValid}
+        disabled={loading || !eachValid || isRedirecting}
       >
-        {loading ? "Creating..." : "Create Post"}
+        {loading ? (
+          <>
+            Creating... <span className="loading loading-spinner loading-xs" />
+          </>
+        ) : (
+          <>
+            Create Post <MdPlaylistAddCheckCircle />
+          </>
+        )}
       </button>
     </form>
   );

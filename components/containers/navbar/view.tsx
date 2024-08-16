@@ -3,8 +3,10 @@ import Link from "next/link";
 import React from "react";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { ThemeToggle } from "@/components/presentational";
+import { links } from "@/config";
 
 export function Navbar() {
+  const navigation = Object.values(links);
   return (
     <nav className="bg-base-100 shadow-md w-full top-0 left-0 z-50 mb-4">
       <div className="max-w-[1120px] mx-auto px-4 py-3 flex items-center justify-between">
@@ -18,6 +20,11 @@ export function Navbar() {
         </div>
 
         <div className="hidden sm:flex items-center space-x-6">
+          {navigation.map((link) => (
+            <Link className="link-primary" key={link.src} href={link.src}>
+              {link.name}
+            </Link>
+          ))}
           <ThemeToggle />
         </div>
 
@@ -32,13 +39,17 @@ export function Navbar() {
               <GiHamburgerMenu className="h-6 w-6 text-primary" />
             </button>
             <ul className="dropdown-content mt-2 p-2 shadow bg-base-100 rounded-box w-48">
+              {navigation.map((link) => (
+                <li key={link.src}>
+                  <Link href={link.src}>
+                    <button type="button" className="btn btn-primary w-full">
+                      {link.name}
+                    </button>
+                  </Link>
+                </li>
+              ))}
               <li className="mt-2">
-                <button
-                  type="button"
-                  className="w-full px-4 py-2 text-base font-medium text-base-content hover:bg-base-200 rounded"
-                >
-                  <ThemeToggle />
-                </button>
+                <ThemeToggle />
               </li>
             </ul>
           </div>

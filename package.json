@@ -1,15 +1,20 @@
 {
   "name": "nextjs-blog-frontend",
   "version": "0.1.0",
+  "description": "A responsive blog application with a dynamic frontend built with Next.js and a robust backend powered by Nest.js.",
   "private": true,
+  "author": "Mykola Lebid <realkolos1@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/iNikolas/nextjs-blog-frontend"
+  },
   "scripts": {
-    "generate-api": "dotenv -e .env -- sh -c 'npx swagger-typescript-api -p $NEXT_PUBLIC_API_URL/api-json -o ./api -n document.ts'",
+    "generate-api": "./run generate_api",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "husky install",
-    "postinstall": "npm run generate-api"
+    "prepare": "husky install"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -62,5 +67,17 @@
       "eslint --cache --fix --max-warnings 0"
     ],
     "*.{css,md}": "prettier --write"
-  }
+  },
+  "keywords": [
+    "blog",
+    "next.js",
+    "nest.js",
+    "typescript",
+    "mongodb",
+    "full-stack",
+    "responsive",
+    "API",
+    "frontend",
+    "backend"
+  ]
 }

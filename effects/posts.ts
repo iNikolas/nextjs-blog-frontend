@@ -4,8 +4,10 @@ import { createEffect } from "effector";
 import { api } from "@/api";
 import {
   IndividualPost,
+  NewPost,
   PaginationData,
   PaginationQuery,
+  PostBase,
   PostsFeed,
 } from "@/entities";
 
@@ -50,6 +52,31 @@ export const getSinglePostDataFx = createEffect(
         text: DOMPurify.sanitize(data.content?.content ?? ""),
         postImg: data.content?.post_img ?? "",
       },
+    };
+  }
+);
+
+export const createPostFx = createEffect(
+  async ({
+    title,
+    shortDesc,
+    featuredImg,
+    postImg,
+    text,
+  }: NewPost): Promise<PostBase> => {
+    const { data } = await api.posts.postsControllerCreate({
+      title,
+      shortDesc,
+      featuredImg,
+      postImg,
+      content: text,
+    });
+
+    return {
+      id: data.post_id,
+      created: data.created_at,
+      updated: data.updated_at,
+      title: data.title,
     };
   }
 );

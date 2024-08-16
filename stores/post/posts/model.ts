@@ -3,9 +3,11 @@ import { createGate } from "effector-react";
 
 import { paginationLimit } from "@/config";
 import { getAllPostsFx, showErrorMessageFx } from "@/effects";
-import { PaginationData, PostsFeed } from "@/entities";
+import { FeedPost, PaginationData, PostsFeed } from "@/entities";
 
 export const updatePostsFeedRequested = createEvent();
+
+export const newPostCreated = createEvent<FeedPost>();
 
 export const Gate = createGate();
 
@@ -22,6 +24,26 @@ export const $error = createStore(false)
   .on(getAllPostsFx.pending, () => false);
 
 const $hasMore = createStore(true);
+
+sample({
+  clock: newPostCreated,
+  source: { postsFeed: $postsFeed, paginationData: $paginationData },
+  filter: ({ paginationData, postsFeed }, newPost) =>
+    !!paginationData && !postsFeed.find((post) => post.id === newPost.id),
+  fn: ({ postsFeed }, newPost) => [newPost, ...postsFeed],
+  target: $postsFeed,
+});
+
+sample({
+  clock: newPostCreated,
+  source: { paginationData: $paginationData },
+  filter: ({ paginationData }) => !!paginationData,
+  fn: ({ paginationData }) =>
+    paginationData == null
+      ? null
+      : { ...paginationData, total: paginationData.total + 1 },
+  target: $paginationData,
+});
 
 sample({
   clock: Gate.open,
@@ -48,7 +70,12 @@ sample({
 sample({
   clock: getAllPostsFx.doneData,
   source: { postsFeed: $postsFeed },
-  fn: ({ postsFeed }, { data }) => [...postsFeed, ...data],
+  fn: ({ postsFeed }, { data }) => [
+    ...postsFeed,
+    ...data.filter(
+      ({ id }) => !postsFeed.find((postFeed) => postFeed.id === id)
+    ),
+  ],
   target: $postsFeed,
 });
 
