@@ -8,7 +8,6 @@ export function Navbar() {
   return (
     <nav className="bg-base-100 shadow-md w-full top-0 left-0 z-50 mb-4">
       <div className="max-w-[1120px] mx-auto px-4 py-3 flex items-center justify-between">
-        {/* Logo and Hamburger Menu */}
         <div className="flex items-center space-x-4">
           <Link
             href="/"
@@ -16,15 +15,6 @@ export function Navbar() {
           >
             Personal Blog
           </Link>
-          <div className="sm:hidden">
-            <button
-              type="button"
-              className="p-2 rounded-md hover:bg-base-200 transition-colors duration-300"
-              aria-label="Open menu"
-            >
-              <GiHamburgerMenu className="h-6 w-6 text-primary" />
-            </button>
-          </div>
         </div>
 
         <div className="hidden sm:flex items-center space-x-6">
@@ -32,7 +22,7 @@ export function Navbar() {
         </div>
 
         <div className="sm:hidden">
-          <div className="dropdown">
+          <div className="dropdown dropdown-end z-10">
             <button
               type="button"
               tabIndex={0}
