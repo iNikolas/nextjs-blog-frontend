@@ -11,10 +11,12 @@ export interface PostMeta {
 }
 
 export interface PostContent {
-  content: string;
+  text: string;
   postImg: string;
 }
 
 export type FeedPost = PostBase & { meta: PostMeta };
+
+export type IndividualPost = PostBase & { content: PostContent };
 
 export type PostsFeed = Array<FeedPost>;

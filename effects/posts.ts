@@ -1,7 +1,13 @@
+import DOMPurify from "dompurify";
 import { createEffect } from "effector";
 
 import { api } from "@/api";
-import { PaginationData, PaginationQuery, PostsFeed } from "@/entities";
+import {
+  IndividualPost,
+  PaginationData,
+  PaginationQuery,
+  PostsFeed,
+} from "@/entities";
 
 export const getAllPostsFx = createEffect(async function getAllPosts(
   pagination: PaginationQuery
@@ -30,3 +36,20 @@ export const getAllPostsFx = createEffect(async function getAllPosts(
     })),
   };
 });
+
+export const getSinglePostDataFx = createEffect(
+  async (id: string): Promise<IndividualPost> => {
+    const { data } = await api.posts.postsControllerFindOne(id);
+
+    return {
+      id: data.post_id,
+      created: data.created_at,
+      updated: data.updated_at,
+      title: data.title,
+      content: {
+        text: DOMPurify.sanitize(data.content?.content ?? ""),
+        postImg: data.content?.post_img ?? "",
+      },
+    };
+  }
+);
