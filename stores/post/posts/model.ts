@@ -21,7 +21,7 @@ export const $loading = combine([getAllPostsFx.pending], (tuple) =>
 
 export const $error = createStore(false)
   .on(getAllPostsFx.fail, () => true)
-  .on(getAllPostsFx.pending, () => false);
+  .on(updatePostsFeedRequested, () => false);
 
 const $hasMore = createStore(true);
 
