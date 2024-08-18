@@ -54,9 +54,8 @@ npm run generate-api
 
 ## Deployment
 
-    - **Frontend:** Deployed on[Vercel](https://nextjs-blog-frontend-one.vercel.app/)
-
-    - **Backend:** Deployed on [Render](https://nestjs-blog-backend.onrender.com)
+- **Frontend:** Deployed on [Vercel](https://nextjs-blog-frontend-one.vercel.app/)
+- **Backend:** Deployed on [Render](https://nestjs-blog-backend.onrender.com)
 
 ## Contributing
 
